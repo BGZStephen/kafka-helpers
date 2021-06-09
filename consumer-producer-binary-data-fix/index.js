@@ -27,21 +27,13 @@ async function main() {
 
   consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      if (/[\x00-\x1F]/.test(message.key?.toString())) {
-        console.log(message.key)
-        console.log({
-          key: message.key.toString(),
-          value: message.value
-        })
-
-        if (message.value) {
-          await producer.send({
-            topic,
-            messages: [
-                { key: message.key.toString(), value: null, partition },
-            ],
-          }) 
-        }
+      if (/[\x00-\x1F]/.test(message.key?.toString()) && message.value) {
+        await producer.send({
+          topic,
+          messages: [
+              { key: message.key.toString(), value: null, partition },
+          ],
+        }) 
       }
     },
   })

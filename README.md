@@ -1,5 +1,11 @@
 # kafka-helpers
 
+## Overwriting binary containing key / values
+
+See [here](consumer-producer-binary-data-fix/index.js)
+
+A helper script for connecting to an existing topic, iterating through the data and tombstoning any found keys / values that contain unexpected binary data
+
 ## Resetting offsets
 
 In order to reset a kafka consumer, first ensure the consumer is closed down, otherwise you'll receive an error.
